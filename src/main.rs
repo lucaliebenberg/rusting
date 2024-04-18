@@ -1,11 +1,36 @@
-fn main() {
-    let file = std::fs::read_to_string("lines").unwrap();
+enum Color {
+    Red,
+    Green,
+    Blue
+}
 
-    file
-        .lines()
-        .enumerate()// enumerate creates a tuple
-        .filter(|(idx, _)| idx % 2 == 0)
-        .for_each(|(_, line)| println!("{}", line));
+impl Color {
+    fn is_green(&self) -> bool {
+        if let Color::Green = self {
+            return true;
+        }
+        return false;
+    }
+
+    fn is_green_parts(&self) ->  bool {
+        match self {
+            Color::Red => return false,
+            Color::Green => return false,
+            Color::Blue => return true,
+        }
+    }
+}
+
+fn print_color(color: Color) {
+    match color {
+        Color::Blue => println!("blue"),
+        Color::Green => println!("green"),
+        Color::Red => println!("red")
+    }
+}
+
+fn main() {
+    // let foo = Color::Green;
 }
 
 
@@ -21,12 +46,18 @@ fn main() {
 
 
 
-
-
-
-
-
-
+/* BASIC READ FILE IMPLEMENTATION */
+// fn main() {
+//     let file = std::fs::read_to_string("lines").unwrap();
+//
+//     file
+//         .lines()
+//         .enumerate()// enumerate creates a tuple
+//         .filter(|(idx, _)| idx % 2 == 0)
+//         .skip(2)
+//         .take(2)
+//         .for_each(|(_, line)| println!("{}", line));
+// }
 
 
 /* BASIC MAPPING IMPLEMENTATION */
