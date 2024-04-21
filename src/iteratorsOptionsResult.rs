@@ -5,10 +5,11 @@ fn main() {
     let file = std::fs::read_to_string(file_name)
     .expect("unable to read the file to string");
 
-    file
-    .lines()
-    .filter_map(|line| line.parse::<usize>().ok()) // filter out None values
-    .for_each(|line| {
-        println!("{}", line);           
+    file.lines().for_each(|line| {
+        if let Ok(value) = line.parse::<usize>() {
+            println!("{}", value);
+        } else {
+            println!("Line not a number", line);           
+        }
     });
 }
