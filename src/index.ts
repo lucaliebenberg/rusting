@@ -1,6 +1,3 @@
-import fs from "fs";
-
-fs.readFileSync("lines").
-    toString().
-    split("\n").
-    forEach(line => console.log(line))
+function indexerFunc(nums: number[], index: number): number {
+    return (nums[index] ?? index) * 5;
+}
