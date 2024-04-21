@@ -55,7 +55,7 @@ impl Iterator for RectIter {
     }
 }
 
-impl IntoIterator for Rect {
+impl IntoIterator for &Rect {
     type Item = (f64, f64); 
 
     type IntoIterator = RectIter;
