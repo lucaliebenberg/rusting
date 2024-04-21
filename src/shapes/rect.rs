@@ -3,6 +3,7 @@ use crate::shapes::collisions::Collidable;
 use crate::Circle;
 
 use super:: area::Area;
+use super::collisions::{Contains, Points};
 
 pub struct Rect {
     pub x: f64,
@@ -11,28 +12,17 @@ pub struct Rect {
     pub height: f64,
 }
 
-impl Rect {
-    pub fn contains_point(&self, (x,y): (f64, f64)) -> bool {
+impl Contains for Rect {
+    fn contains_point(&self, (x,y): (f64, f64)) -> bool {
         return 
             self.x <= x && self.x + self.width >= x && 
             self.y <= y && self.y + self.height >= y; 
     }
 }
 
-impl Collidable<Rect> for Rect {
-    fn collide(&self, other: &Rect) -> bool {
-        for point in other {
-            if self.contains_point(point) {
-                return true;
-            }
-        }
-        return false;
-    }
-}
-
-impl Collidable<Circle> for Rect {
-    fn collide(&self, other: &Circle) -> bool {
-        return self.contains_point((other.x, other.y));
+impl Points for Rect {
+    fn points(&self) -> super::collisions::PointIter {
+        todo!()
     }
 }
 
@@ -83,7 +73,16 @@ impl Iterator for RectIter {
     }
 }
 
-impl IntoIterator for &Rect {
+impl From<&Rect> for RectIter {
+    fn from(value: &Rect) -> Self {
+        return RectIter {
+            points:
+            idx: 0
+        };
+    }
+}
+
+impl IntoIterator for Rect {
     type Item = (f64, f64); 
 
     type IntoIterator = RectIter;

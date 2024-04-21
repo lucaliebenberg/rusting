@@ -11,7 +11,7 @@ pub trait Collidable<T> {
     }
 }
 
-struct PointIter {
+pub(crate) struct PointIter {
     points: Vec<(f64, f64)>,
     idx: usize,
 }
